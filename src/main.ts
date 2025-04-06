@@ -1,20 +1,36 @@
-// SNACK 1
+// SNACK 1 
 function stampaDato(dato: unknown): void {
-    if (typeof dato === "string") {
-      console.log(dato.toUpperCase());
-    } else if (typeof dato === "number") {
-      console.log(dato * 2);
-    } else if (typeof dato === "boolean") {
-      console.log(dato ? "Sì" : "No");
-    } else {
-      console.log("Tipo non supportato");
-    }
+  if (dato === null) {
+    console.log("Il dato è vuoto");
+  } else if (Array.isArray(dato)) {
+    console.log(`Array di lunghezza: ${dato.length}`);
+  } else if (dato instanceof Promise) {
+    dato
+      .then((valoreRisolto) => {
+        console.log("Promise risolta con:", valoreRisolto);
+      })
+      .catch((errore) => {
+        console.log("Promise rifiutata con errore:", errore);
+      });
+  } else if (typeof dato === "string") {
+    console.log(dato.toUpperCase());
+  } else if (typeof dato === "number") {
+    console.log(dato * 2);
+  } else if (typeof dato === "boolean") {
+    console.log(dato ? "Sì" : "No");
+  } else {
+    console.log("Tipo non supportato");
   }
-  
-  stampaDato("ciao");    
-  stampaDato(21);         
-  stampaDato(false);       
-  stampaDato({});         
+}
+
+stampaDato("ciao");                
+stampaDato(21);                   
+stampaDato(false);                 
+stampaDato({});               
+stampaDato(null);                
+stampaDato([1, 2, 3]);              
+stampaDato(Promise.resolve("ok")); 
+stampaDato(Promise.reject("errore")); 
   
 // SNACK 2
 type Dipendente = {
